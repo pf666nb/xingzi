@@ -24,7 +24,12 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void findUser(String userId) {
-        xzUserMapper.selectByPrimaryKey(userId);
+    public XzUser findUser(String userId) {
+        return xzUserMapper.selectByPrimaryKey(userId);
+    }
+
+    @Override
+    public XzUser findUserByLoginName(String LoginName) {
+        return xzUserMapper.selectByLoginName(LoginName);
     }
 }

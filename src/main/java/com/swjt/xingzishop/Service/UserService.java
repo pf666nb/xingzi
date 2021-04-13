@@ -8,5 +8,6 @@ public interface UserService {
     void save(XzUser user);
     void delUser(XzUser user);
     void updateUser(XzUser user);
-    void findUser(String userId);
+    XzUser findUser(String userId);
+    XzUser findUserByLoginName(String LoginName);
 }
