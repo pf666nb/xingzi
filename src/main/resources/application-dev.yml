@@ -7,7 +7,7 @@ spring:
     password: 12345678
     driver-class-name: com.mysql.cj.jdbc.Driver
 mybatis:
-  mapper-locations: classpath:mapping/*Mapper.xml
+  mapper-locations: classpath:Mapper/*Mapper.xml
   type-aliases-package: com.swjt.xingzishop.Bean
 logging:
   level:

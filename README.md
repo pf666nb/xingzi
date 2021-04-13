@@ -509,5 +509,224 @@ public class XzUser implements Serializable {
 }
 ```
 
-以上是目前为止生成的实体类
+以上是目前为止生成的实体类,
+
+接下来需要写测试类来测试之前的持久层代码
+
+新增以下包的结构，
+
+
+
+编写测试类时候遇到一个小问题，@RunWith这个注解无法找到
+
+[RunWith无法找到](https://blog.csdn.net/y2020520/article/details/107690958?utm_medium=distribute.pc_relevant.none-task-blog-baidujs_title-0&spm=1001.2101.3001.4242) <--参考资料
+
+根据参考资料我们加入依赖
+
+```xml
+  <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.12</version>
+            <scope>test</scope>
+        </dependency>
+```
+
+
+
+@RunWith便可以使用了
+
+> 最后提示: 虽然 idea生成的测试类,只自动生成了一个@SpringBootTest注解;没有@RunWith注解;也是能够运行的;
+> 但是建议:
+> 标准测试类里还是要有@RunWith的，作用是告诉java你这个类通过用什么运行环境运行，例如启动和创建spring的应用上下文。否则你需要为此在启动时写一堆的环境配置代码。你在IDEA里去掉@RunWith仍然能跑是因为在IDEA里识别为一个JUNIT的运行环境，相当于就是一个自识别的RUNWITH环境配置。但在其他IDE里并没有。
+>
+> 所以，为了你的代码能在其他IDE里边正常跑，建议还是加@RunWith
+> ————————————————
+> 版权声明：本文为CSDN博主「逸佳6」的原创文章，遵循CC 4.0 BY-SA版权协议，转载请附上原文出处链接及本声明。
+> 原文链接：https://blog.csdn.net/y2020520/article/details/107690958
+
+新建一个总的测试类
+
+```java
+package com.swjt.xingzishop;
+
+
+import org.junit.runner.RunWith;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringRunner;
+
+
+@SpringBootTest
+@RunWith(SpringRunner.class)
+public class SpringTest {
+
+
+}
+
+```
+
+内部不需要写方法，其他测试类只需要继承这个类就能进行测试了
+
+现在来测试持久层
+
+编写测试类
+
+```java
+package com.swjt.xingzishop.Service;
+
+import com.swjt.xingzishop.Bean.XzUser;
+import com.swjt.xingzishop.Mapper.XzUserMapper;
+import com.swjt.xingzishop.SpringTest;
+
+import org.junit.FixMethodOrder;
+import org.junit.Test;
+import org.junit.runners.MethodSorters;
+
+
+import javax.annotation.Resource;
+import java.util.Date;
+
+@FixMethodOrder(MethodSorters.JVM)
+public class UserServiceTest extends SpringTest {
+    @Resource
+    private XzUserMapper mapper;
+    @Test
+    public void save() {
+        XzUser xzUser = new XzUser();
+        xzUser.setUserId("qwertyuiopasd");
+        xzUser.setUserCreatetime(new Date());
+        xzUser.setUserUpdatetime(new Date());
+        xzUser.setUserLoginname("123456789");
+        xzUser.setUserPassword("123456789");
+        xzUser.setUserName("wpf");
+        xzUser.setUserIsban(true);
+        mapper.insert(xzUser);
+
+    }
+    @Test
+    public void findUser() {
+        XzUser xzUser = mapper.selectByPrimaryKey("qwertyuiopasd");
+        System.out.println(xzUser.toString());
+
+    }
+    @Test
+    public void updateUser() {
+        XzUser xzUser = new XzUser();
+        xzUser.setUserId("qwertyuiopasd");
+        xzUser.setUserCreatetime(new Date());
+        xzUser.setUserUpdatetime(new Date());
+        xzUser.setUserLoginname("123456789");
+        xzUser.setUserPassword("123456789");
+        xzUser.setUserName("zhy");
+        xzUser.setUserIsban(true);
+        int i = mapper.updateByPrimaryKey(xzUser);
+        System.out.println(i);
+
+    }
+
+    @Test
+    public void delUser() {
+        mapper.deleteByPrimaryKey("qwertyuiopasd");
+
+    }
+
+
+
+
+}
+
+```
+
+@FixMethodOrder(MethodSorters.JVM)这行代码是用来让方法进行排序，按照顺序执行
+
+使得数据可以循环
+
+>  JUnit是通过@FixMethodOrder注解(annotation)来控制测试方法的执行顺序的。
+> @FixMethodOrder注解的参数是org.junit.runners.MethodSorters对象,
+> 在枚举类org.junit.runners.MethodSorters中定义了如下三种顺序类型：
+>
+> **MethodSorters.JVM(按照JVM得到的方法顺序，代码中定义的方法顺序)**
+> Leaves the test methods in the order returned by the JVM. Note that the order from the JVM may vary from run to run
+>
+> **MethodSorters.DEFAULT(默认的顺序)**
+> Sorts the test methods in a deterministic, but not predictable, order() (以确定但不可预期的顺序执行)
+>
+> **MethodSorters.NAME_ASCENDING(按方法名字母顺序执行)**
+> Sorts the test methods by the method name, in lexicographic order, with Method.toString() used as a tiebreaker
+
+### springboot整合Swagger
+
+为了方便后台调用接口进行测试，以往一般使用postman对后台接口进行测试，过程比较繁琐，有了swagger之后，后台测试会方便许多
+
+> Swagger 为开发者提供了一套规范去定义接口和接口相关的信息，通过 springfox-swagger 依赖 jar 包可以将基于 Spring MVC 和 Spring Boot 项目的项目代码，自动生成 JSON 格式的描述文件，我们可以通过这套接口描述数据生成各种接口文档。
+>
+> 目前有很大一部分 Spring Boot 的开发者会将其用来构建 RESTful API，而我们构建RESTful API的目的通常都是由于多终端的原因，这些终端会共用很多底层业务逻辑，因此我们会抽象出这样一层来同时服务于多个移动端或者Web前端。这样一来，我们的RESTful API就有可能要面对多个开发人员或多个开发团队：iOS 开发、Android 开发或是Web开发等。为了减少与其他团队平时开发期间的频繁沟通成本，传统做法我们会创建一份 API 文档来记录所有接口细节，然而这样的做法有以下几个问题：
+>
+> - 由于接口众多，并且细节复杂（需要考虑不同的HTTP请求类型、HTTP头部信息、HTTP请求内容等），编写一份完整的 API 文档非常吃力。
+> - 随着时间推移，不断修改接口实现的时候都必须同步修改接口文档，维护起来十分麻烦。
+>
+> 为了解决上面这样的问题，主要是简化开发人员的开发成本以及减少前后端开发人员之间的交流成本，就不得不提一下当前最流行的 API 管理工具 Swagger，你可以叫它“丝袜哥”。
+>
+> Swagger 的目标是为 RESTful API 定义一个标准的，与语言无关的接口，使人和计算机在看不到源码或者看不到文档或者不能通过网络流量检测的情况下能发现和理解各种服务的功能，在 Spring Boot 项目中集成 Swagger 可以使用注解来标记出需要在 API 文档中展示的信息，Swagger 会根据项目中标记的注解来生成对应的 API 文档。当然，不仅仅是 Spring Boot 项目，在其他技术栈的项目中也可以通过对应的整合方式去使用 Swagger。
+
+##### 导入依赖
+
+首先，在 pom.xml 中加入 Swagger 的依赖信息，pom.xml 文件更新如下：
+
+```xml
+<!-- swagger2 -->
+		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-swagger2</artifactId>
+			<version>2.8.0</version>
+		</dependency>
+		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-swagger-ui</artifactId>
+			<version>2.8.0</version>
+		</dependency>
+		<!-- swagger2 -->
+```
+
+##### 编写配置类
+
+```java
+package com.swjt.xingzishop.Config;
+
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import springfox.documentation.builders.ApiInfoBuilder;
+import springfox.documentation.builders.PathSelectors;
+import springfox.documentation.builders.RequestHandlerSelectors;
+import springfox.documentation.service.ApiInfo;
+import springfox.documentation.spi.DocumentationType;
+import springfox.documentation.spring.web.plugins.Docket;
+import springfox.documentation.swagger2.annotations.EnableSwagger2;
+
+@Configuration
+@EnableSwagger2
+public class Swagger2Config {
+
+    @Bean
+    public Docket api() {
+        return new Docket(DocumentationType.SWAGGER_2)
+                .apiInfo(apiInfo())
+                .select()
+                .apis(RequestHandlerSelectors.basePackage("com.swjt.xingzishop.Controller"))
+                .paths(PathSelectors.any())
+                .build();
+    }
+
+    private ApiInfo apiInfo() {
+        return new ApiInfoBuilder()
+                .title("swagger-api文档")
+                .description("swagger文档 by wpf")
+                .version("1.0")
+                .build();
+    }
+}
+
+```
+
+然后启动项目，项目启动之后访问http://localhost:8080/swagger-ui.html#/
 
