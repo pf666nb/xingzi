@@ -33,9 +33,7 @@ spring:
 
 
 
-![截图](https://github.com/pf666nb/xingzi/blob/master/src/main/resources/image/1
-
-.png)
+![截图](https://github.com/pf666nb/xingzi/blob/master/src/main/resources/image/1.png)
 
 字符集的选择为utf8mb4
 
