@@ -1,5 +1,5 @@
 package com.swjt.xingzishop.Config;
-import com.swjt.xingzishop.sercurity.*;
+import com.swjt.xingzishop.Sercurity.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.authentication.AuthenticationDetailsSource;

@@ -1,10 +1,10 @@
-package com.swjt.xingzishop.sercurity;
+package com.swjt.xingzishop.Sercurity;
 
 import com.alibaba.fastjson.JSON;
 
 import com.swjt.xingzishop.enums.ResultCode;
-import com.swjt.xingzishop.utils.ResultTool;
-import com.swjt.xingzishop.vo.JsonResult;
+import com.swjt.xingzishop.Utils.ResultTool;
+import com.swjt.xingzishop.Vo.JsonResult;
 import org.springframework.security.authentication.InsufficientAuthenticationException;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.AuthenticationEntryPoint;

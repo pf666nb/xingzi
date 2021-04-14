@@ -1,4 +1,4 @@
-package com.swjt.xingzishop.sercurity;
+package com.swjt.xingzishop.Sercurity;
 
 import org.springframework.security.authentication.AuthenticationDetailsSource;
 import org.springframework.security.web.authentication.WebAuthenticationDetails;

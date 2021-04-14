@@ -1,6 +1,7 @@
-package com.swjt.xingzishop.vo;
+package com.swjt.xingzishop.Vo;
 
-import com.simplestudio.fugitive.enums.ResultCode;
+
+import com.swjt.xingzishop.enums.ResultCode;
 
 import java.io.Serializable;
 

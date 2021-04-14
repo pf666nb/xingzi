@@ -1,8 +1,8 @@
-package com.swjt.xingzishop.utils;
+package com.swjt.xingzishop.Utils;
 
 
 import com.swjt.xingzishop.enums.ResultCode;
-import com.swjt.xingzishop.vo.JsonResult;
+import com.swjt.xingzishop.Vo.JsonResult;
 
 /**
  * branches

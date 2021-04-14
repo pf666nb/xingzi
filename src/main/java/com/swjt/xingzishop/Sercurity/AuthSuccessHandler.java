@@ -1,10 +1,11 @@
-package com.swjt.xingzishop.sercurity;
+package com.swjt.xingzishop.Sercurity;
 
 import com.alibaba.fastjson.JSON;
 import com.swjt.xingzishop.Bean.XzUser;
-import com.swjt.xingzishop.Service.UserService;
-import com.swjt.xingzishop.utils.ResultTool;
-import com.swjt.xingzishop.vo.JsonResult;
+
+import com.swjt.xingzishop.Service.XZUserService;
+import com.swjt.xingzishop.Utils.ResultTool;
+import com.swjt.xingzishop.Vo.JsonResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
@@ -29,7 +30,7 @@ public class AuthSuccessHandler implements AuthenticationSuccessHandler {
 
     public static AuthSuccessHandler authSuccessHandler;
     @Autowired
-    private UserService userService;
+    private XZUserService userService;
 
     @PostConstruct
     public void init() {

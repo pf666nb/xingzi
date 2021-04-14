@@ -1,4 +1,4 @@
-package com.swjt.xingzishop.sercurity;
+package com.swjt.xingzishop.Sercurity;
 
 
 import org.springframework.beans.factory.annotation.Qualifier;

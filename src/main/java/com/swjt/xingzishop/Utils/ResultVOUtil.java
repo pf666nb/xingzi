@@ -1,6 +1,7 @@
-package com.swjt.xingzishop.utils;
+package com.swjt.xingzishop.Utils;
 
-import com.simplestudio.fugitive.vo.ResultVO;
+
+import com.swjt.xingzishop.Vo.ResultVO;
 
 /**
  * fugitive

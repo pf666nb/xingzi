@@ -1,4 +1,4 @@
-package com.swjt.xingzishop.vo;
+package com.swjt.xingzishop.Vo;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;

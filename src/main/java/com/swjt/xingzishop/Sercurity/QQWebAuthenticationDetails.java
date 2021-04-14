@@ -1,4 +1,4 @@
-package com.swjt.xingzishop.sercurity;
+package com.swjt.xingzishop.Sercurity;
 
 
 import com.swjt.xingzishop.enums.RandCode;
@@ -12,21 +12,21 @@ import javax.servlet.http.HttpSession;
 
 /**
  * branches
- * 拓展验证码类
+ * 通过QQ登录的Details
  *
  * @author : wpf
- * @date : 2020-10-29 20:48
+ * @date : 2020-11-03 17:40
  **/
 @Getter
 @Setter
-public class MyWebAuthenticationDetails extends WebAuthenticationDetails {
+public class QQWebAuthenticationDetails extends WebAuthenticationDetails {
     private String imageCode;
     private String savedImageCode;
 
 
-    public MyWebAuthenticationDetails(HttpServletRequest request) {
+    public QQWebAuthenticationDetails(HttpServletRequest request) {
         super(request);
-        this.imageCode = request.getParameter(RandCode.CAPTCHA.getType());
+        this.imageCode = "QQ_LOGIN_CODE";
         HttpSession session = request.getSession();
         this.savedImageCode = (String) session.getAttribute(RandCode.CAPTCHA.getType());
         if (StringUtils.isEmpty(this.savedImageCode)) {

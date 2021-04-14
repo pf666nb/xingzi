@@ -266,7 +266,6 @@ public class XzUser implements Serializable, UserDetails {
         sb.append("]");
         return sb.toString();
     }
-
     private List<GrantedAuthority> authorities;
 
     @Override
@@ -276,31 +275,31 @@ public class XzUser implements Serializable, UserDetails {
 
     @Override
     public String getPassword() {
-        return null;
+        return this.userPassword;
     }
 
     @Override
     public String getUsername() {
-        return null;
+        return this.userLoginname;
     }
 
     @Override
     public boolean isAccountNonExpired() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isAccountNonLocked() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isCredentialsNonExpired() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isEnabled() {
-        return false;
+        return this.userIsban;
     }
 }

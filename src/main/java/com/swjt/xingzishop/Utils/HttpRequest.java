@@ -1,4 +1,4 @@
-package com.swjt.xingzishop.utils;
+package com.swjt.xingzishop.Utils;
 
 import java.io.BufferedReader;
 import java.io.IOException;
