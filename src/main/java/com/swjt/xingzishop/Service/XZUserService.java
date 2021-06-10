@@ -15,4 +15,6 @@ public interface XZUserService {
     XzUser findUser(String userId);
 
     XzUser findUserByLoginName(String LoginName);
+
+    boolean registerUser(XzUser user);
 }
