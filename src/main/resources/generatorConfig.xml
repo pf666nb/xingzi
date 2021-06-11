@@ -53,5 +53,6 @@
          <table tableName="tel_bill_record" domainObjectName="DSTelBillRecord" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>-->
         <table tableName="XZ_User"></table>
         <table tableName="XZ_Role"></table>
+        <table tableName="XZ_Goods"></table>
     </context>
 </generatorConfiguration>
